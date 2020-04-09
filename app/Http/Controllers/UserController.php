@@ -19,6 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny',User::class);
         $users=User::all();
         return view('admin.user.index',compact('users'));
     }
@@ -51,10 +52,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view',User::class);
         return view('admin.user.show',compact('user'));
     }
-    public function news(User $user){
+
+    public function news(Request $request,User $user){
         $this->authorize('sent',$user,User::class);
+        $user->news=$request->news;
         $articles=Article::latest()->take($user->news)->get();
         Mail::to($user->email)->send(new NewsLetterMail($articles));
         $user->sent=true;
@@ -69,6 +73,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('update',$user,User::class);
         $roles=Role::all();
         return view('admin.user.edit',compact('user','roles'));
     }
@@ -82,6 +87,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('update',$user,User::class);
         $user->name=$request->name;
         $user->email=$request->email;
         $user->password=Hash::make($request->password);
@@ -98,6 +104,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete',$user,User::class);
         $user->delete();
         return redirect()->back();
     }

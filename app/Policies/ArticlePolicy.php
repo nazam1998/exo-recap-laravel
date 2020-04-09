@@ -53,7 +53,7 @@ class ArticlePolicy
      */
     public function update(User $user, Article $article)
     {
-        return $user->role_id==3 || ($user->role_id==1 && $user->id==$article->user_id);
+        return $user->role_id==1 || ($user->role_id==3 && $user->id==$article->user_id);
     }
 
     /**
@@ -65,7 +65,7 @@ class ArticlePolicy
      */
     public function delete(User $user, Article $article)
     {
-        return $user->role_id==3 || $user->role_id==3 ||($user->role_id==1 && $user->id==$article->user_id);
+        return $user->role_id==2 || $user->role_id==3 || ($user->role_id==1 && $user->id==$article->user_id);
     }
 
     /**

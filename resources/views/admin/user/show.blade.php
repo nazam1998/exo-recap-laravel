@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label for="">Number of Articles in Newsletter</label>
                 <input type="number" class="form-control" name="news" value="{{old('news',$user->news)}}">
-                <button type="submit" class="btn @can('sent',$user,App\User::class)btn-warning @else btn-secondary @endcan mt-2" @cannot('sent',$user,App\User::class)disabled @endcannot>Changer</button>
+                <button type="submit" class="btn @can('sent',$user,App\User::class)btn-warning @else btn-secondary @endcan mt-2" @cannot('sent',$user,App\User::class)disabled @endcannot>Envoyer</button>
                 </div>
             </form>
             </p>

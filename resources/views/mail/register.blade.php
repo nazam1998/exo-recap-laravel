@@ -6,7 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 </head>
 <body>
+    @if($msg->name)
     Hello {{$name}},
-    {{$msg->contenu}} votre adresse email est {{$email}} et votre mot de passe {{$password}}
+    @endif
+    {{$msg->contenu}} @if($msg->email) votre adresse email est {{$email}}
+    @endif
+    @if($msg->password)
+     et votre mot de passe {{$password}}
+     @endif
 </body>
 </html>

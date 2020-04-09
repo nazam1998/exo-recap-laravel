@@ -49,12 +49,21 @@
                                 </li>
                             @endif
                         @else
+                        @can('viewAny',App\Registermail::class)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('mail') }}">Mail</a>
+                        </li>        
+                        @endcan
+                        @can('viewAny', App\Article::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('article.index') }}">Articles</a>
                         </li>
+                        @endcan
+                        @can('viewAny', App\User::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user') }}">User</a>
                         </li>
+                        @endcan
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

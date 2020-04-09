@@ -5,7 +5,7 @@
 <h1>Modificatio d'Article</h1>
     <form action="{{route('article.update',$article)}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="_method" value="PUT">
+        @method('PUT')
         <div class="form-group">
             <label for="">Titre</label>
             @error('titre')

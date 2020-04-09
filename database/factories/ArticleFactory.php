@@ -10,7 +10,7 @@ $factory->define(Article::class, function (Faker $faker) {
     $user=User::inRandomOrder()->first()->id;
     return [
         'titre'=>$faker->name,
-        'image'=>'',
+        'image'=>'YyD7XpN6y4tTwdrSnYZQfJJHpa0FJWryMbwvEESa.png',
         'texte'=>$faker->text,
         'user_id'=>$user,
     ];

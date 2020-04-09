@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Registermail;
+use App\User;
 use Illuminate\Http\Request;
 
 class RegistermailController extends Controller
@@ -14,7 +15,9 @@ class RegistermailController extends Controller
      */
     public function index()
     {
-        //
+        $this->authorize('viewAny',User::class);
+        $mail=Registermail::find(1);
+        return view('admin.mail.index',compact('mail'));
     }
 
     /**
@@ -55,9 +58,10 @@ class RegistermailController extends Controller
      * @param  \App\Registermail  $registermail
      * @return \Illuminate\Http\Response
      */
-    public function edit(Registermail $registermail)
+    public function edit(Registermail $mail)
     {
-        //
+        $this->authorize('update',$mail,Registermail::class);
+        return view('admin.mail.edit',compact('mail'));
     }
 
     /**
@@ -67,9 +71,17 @@ class RegistermailController extends Controller
      * @param  \App\Registermail  $registermail
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Registermail $registermail)
+    public function update(Request $request, Registermail $mail)
     {
-        //
+        $this->authorize('update',$mail,Registermail::class);
+        $mail->contenu=$request->contenu;
+        $mail->name=$request->has('name');
+        $mail->email=$request->has('email');
+        $mail->password=$request->has('password');
+        $mail->save();
+        return redirect()->route('mail');
+
+
     }
 
     /**

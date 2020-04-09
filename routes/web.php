@@ -32,3 +32,8 @@ Route::get('/home', 'HomeController@index')->name('home');
  Route::get('showUser/{user}','UserController@show')->name('showUser');
  Route::get('deleteUser/{user}','UserController@destroy')->name('deleteUser');
  Route::post('newsLetterUser/{user}','UserController@news')->name('newsUser');
+
+ 
+ Route::get('mail','RegistermailController@index')->name('mail');
+ Route::get('editMail/{mail}','RegistermailController@edit')->name('editMail');
+ Route::post('updateMail/{mail}','RegistermailController@update')->name('updateMail');

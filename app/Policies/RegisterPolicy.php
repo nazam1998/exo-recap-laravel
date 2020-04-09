@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Registermail;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class RegisterPolicy
 {
     use HandlesAuthorization;
 
@@ -17,21 +18,19 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role_id<3;
+        return $user->role_id==1;
     }
-    public function sent(User $user,User $model){
-        return !$model->sent &&$user->role_id<3;
-    }
+
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Registermail  $registermail
      * @return mixed
      */
-    public function view(User $user)
+    public function view(User $user, Registermail $registermail)
     {
-        return $user->role_id<3;
+        //
     }
 
     /**
@@ -42,40 +41,41 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->role_id==1;
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Registermail  $registermail
      * @return mixed
      */
-    public function update(User $user, User $model)
+    public function update(User $user, Registermail $registermail)
     {
         return $user->role_id==1;
     }
+
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Registermail  $registermail
      * @return mixed
      */
-    public function delete(User $user, User $model)
+    public function delete(User $user, Registermail $registermail)
     {
-        return $user->role_id==1;
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Registermail  $registermail
      * @return mixed
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, Registermail $registermail)
     {
         //
     }
@@ -84,10 +84,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\User  $user
-     * @param  \App\User  $model
+     * @param  \App\Registermail  $registermail
      * @return mixed
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, Registermail $registermail)
     {
         //
     }

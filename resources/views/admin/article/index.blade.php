@@ -2,9 +2,12 @@
 
 @section('content')
 <div class="container text-center">
+    @can('create', App\Article::class)  
     <a href="{{route('article.create')}}" class="btn btn-primary">Ajouter Article</a>
+    @endcan
     <table class="text-center">
         <thead>
+
             <tr>
                 <th colspan="8">Liste des Articles</th>
             </tr>
@@ -21,23 +24,30 @@
             <tr>
                 <td>{{$item->id}}</td>
                 <td>{{$item->titre}}</td>
-                <td>{{$item->texte}}</td>
                 <td>
                     <img src="{{asset('storage/'.$item->image)}}" alt="">
                 </td>
+                <td>{{$item->texte}}</td>
                 <td>
+                    @can('view',$item,App\Article::class)
                     <a href="{{route('article.show',$item)}}" class="btn btn-success">Show</a>
+                    @endcan
                 </td>
                 <td>
-                    <a href="{{route('article.edit',$item)}}" class="btn btn-warning">Edit</a>
+                    @can('update',$item,App\Article::class)
+                        <a href="{{route('article.edit',$item)}}" class="btn btn-warning">Edit</a>
+                    @endcan
                 </td>
+                
+                @can('delete',$item,App\Article::class)
                 <td>
                     <form action="{{ route('article.destroy', $item) }}" method="POST">
                         @csrf
-                        @method('DELETE')
+                        @method("DELETE")
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
+                @endcan
             </tr>
             @endforeach
         </tbody>
